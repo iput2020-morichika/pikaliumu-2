@@ -47,6 +47,11 @@ class Gra_led:
                strip.fill((int(r*i/255),int(g*i/255),int(b*i/255)))
                strip.show()
                time.sleep(0.01)
+               
+   def laser(self):
+      while True:
+         if value == 0:
+            break
             
 # Function to make an alternating series of lights
 def merrychristmas():
