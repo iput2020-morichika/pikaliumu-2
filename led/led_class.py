@@ -1,3 +1,4 @@
+
 import time
 from gpiozero import Button
 import board
@@ -57,9 +58,8 @@ class Gra_led:
    def harf(self):
       red_harf = (255,0,0)
       white_harf = (255,255,255)
+
       while True:
-         if value == 0:
-            break
          for i in range(LED_COUNT):
             color = (
                int(red_harf[0] * i / (LED_COUNT - 1)),
@@ -78,41 +78,23 @@ class Gra_led:
             strip.fill(downcolor)
             strip.show()
             time.sleep(0.01)
-      # for i in range(LED_COUNT):
-      #   color = (
-      #       int(red_harf[0] * i / (LED_COUNT - 1)),
-      #       int(red_harf[1] * i / (LED_COUNT - 1)),
-      #       int(red_harf[2] * i / (LED_COUNT - 1))
-      #   )
-      #   strip.fill(color)
-      #   strip.show()
-      #   time.sleep(0.01)
-      # for i in range(LED_COUNT):
-      #   downcolor = (
-      #       int(red_harf[0] * (1 - i / (LED_COUNT - 1))),
-      #       int(red_harf[1] * (1 - i / (LED_COUNT - 1))),
-      #       int(red_harf[2] * (1 - i / (LED_COUNT - 1)))
-      #   )
-      #   strip.fill(downcolor)
-      #   strip.show()
-      #   time.sleep(0.01)
                
    def laser(self):
-      count = 0
-      for i in range(LED_COUNT):
-         strip[i] = ((255,0,0))
-         strip.show()
-         strip[i] = ((0,0,0))
-         strip.show()
-         count -= 1
-         time.sleep(0.05)
-         strip[i] = ((255,0,0))
-         strip.show()
-         strip[i] = ((0,0,0))
-         strip.show()
+      for _ in range(1):
+         for i in range(LED_COUNT):
+               strip[i] = (255, 0, 0)
+               strip.show()
+               strip[i] = (0, 0, 0)
+               strip.show()
+               time.sleep(0.001)
+               strip[i] = (255, 0, 0)
+               strip.show()
+               strip[i] = (0, 0, 0)
+               strip.show()
+
+      
 
             
-# Function to make an alternating series of lights
 def merrychristmas():
     for i in range(LED_COUNT):
         if flip == 0:
@@ -124,42 +106,34 @@ def merrychristmas():
     strip.show()
 
 
-# def loop():
-#    strip.fill((0,0,0)) #LEDオフ
-#    while True:
-#       Gra_led.rgb(flip)
-#       if KeyboardInterrupt:
-#          strip.fill((0,0,0))
+flag = 1
 
-# loop()
+def trun_off():   #消灯
+   strip.fill((0,0,0))  
+   strip.show()
 
-flag = 0
-strip.fill((0,0,0))  #消灯
-
-while True:
-    button.wait_for_press()
-    button.wait_for_release()
-    value = flag
-    
-    if value == 0:
-      # strip.fill((255,255,255))
-      # strip.show()
-      strip.fill((0,0,0))
-      strip.show()
-      # time.sleep(0.1)
-      flag = 1
-
-    if value == 1:
-      # strip.fill((255,0,144)) ピンク
-      Gra_led.harf(flip)
-      # while True:
-      #    strip.fill((255,255,255))
-      #    strip.show()
-      #    time.sleep(0.01)
+if __name__=="__main__":
+   # while True:
+      # button.wait_for_press()
+      # button.wait_for_release()
+      value = flag
+      
+      # if value == 0:     #ボタン押下で消灯
       #    strip.fill((0,0,0))
       #    strip.show()
-      #    time.sleep(0.01)
-      
-      
-      # strip.show()
-      flag = 0
+      #    flag = 1
+
+      if value == 1:       #ボタン押下で点灯
+         # strip.fill((255,0,144)) ピンク
+         Gra_led.laser(flip)
+         # while True:
+         #    strip.fill((255,255,255))
+         #    strip.show()
+         #    time.sleep(0.01)
+         #    strip.fill((0,0,0))
+         #    strip.show()
+         #    time.sleep(0.01)
+         
+         
+         # strip.show()
+         flag = 0
