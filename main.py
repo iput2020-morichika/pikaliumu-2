@@ -2,8 +2,9 @@
 ファイルインポート
 """
 # from sensor import suion
-from sensor import jinkan
+from sensor import jinkan, fish_dist, suion, water_dist, ph
 from led import led_class
+import RPi.GPIO as GPIO
 
 """
 初期化処理
@@ -13,7 +14,11 @@ class Flip:
       self.flip = flip
 flip = Flip(0)
 
-jinkan.jinkan()    
+jinkan.jinkan()         #人感
+fish_dist.fish()        #水中距離
+suion.read_temp()       #水温
+water_dist.water_dist() #水位
+ph.pH_concent()         #pH
 
 while True:
   if jinkan.jinkan() == 1:  #人感センサ反応でLED点灯
@@ -29,4 +34,4 @@ while True:
 
 # if s1 > 26.0:
 
-  
+GPIO.cleanup()
