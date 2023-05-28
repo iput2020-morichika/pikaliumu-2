@@ -5,27 +5,25 @@
 import RPi.GPIO as GPIO
 import time
 
-pin = 21
+pin = 23
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(pin, GPIO.IN)
 
-def main():
+def fish():
   try:
-    while True:
         sensor_state = GPIO.input(pin)
-        # print(sensor_state)
-        # time.sleep(0.5)
-        if sensor_state == GPIO.HIGH:
-          print("検出")
-        else:
-          print("---")
-        time.sleep(1)
-
-
+        return sensor_state
   except KeyboardInterrupt:
       pass
+  
 
 if __name__=="__main__":
-  main()
+  while True:
+    status = fish()
+    if status == GPIO.LOW:
+      print("検出")
+    else:
+      print("---")
+    time.sleep(0.5)
 
